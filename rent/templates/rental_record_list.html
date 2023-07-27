@@ -1,0 +1,53 @@
+<!-- rental_record_list.html -->
+{% extends 'base.html' %}
+{% block title %}Rental Records List{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <h1 class="my-4">Rental Records List</h1>
+            <form method="get">
+                {{ rental_record_filter.form.as_p }}
+                <div class="input-group mb-3">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <div class="input-group-append">
+                       
+                    </div>
+                </div>
+            </form>
+            <br>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">UAV</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Renting Member</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rental_record in rental_records %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ rental_record.uav }}</td>
+                            <td>{{ rental_record.start_date }}</td>
+                            <td>{{ rental_record.end_date }}</td>
+                            <td>{{ rental_record.renting_member }}</td>
+                            <td>
+                                {% if user.is_superuser or user == rental_record.renting_member %}
+                                    <a href="{% url 'rental_record_detail' rental_record.pk %}" class="btn btn-info btn-sm">Details</a>
+                                    <a href="{% url 'rental_record_update' rental_record.pk %}" class="btn btn-primary btn-sm">Update</a>
+                                    <a href="{% url 'rental_record_delete' rental_record.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                                {% else %}
+                                    <a href="{% url 'rental_record_detail' rental_record.pk %}" class="btn btn-info btn-sm">Details</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

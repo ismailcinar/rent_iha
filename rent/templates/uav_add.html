@@ -1,0 +1,40 @@
+<!-- uav_add.html -->
+{% extends 'base.html' %}
+{% block title %}Add UAV{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="my-4">Add UAV</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="brand">Brand:</label>
+                    <input type="text" name="brand" id="brand" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="model">Model:</label>
+                    <input type="text" name="model" id="model" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight:</label>
+                    <input type="number" step="0.01" name="weight" id="weight" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input type="text" name="category" id="category" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="rental_price">Rental Price:</label>
+                    <input type="number" step="0.01" name="rental_price" id="rental_price" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image:</label>
+                    <input type="file" name="image" id="image" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+                <a href="{% url 'uav_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

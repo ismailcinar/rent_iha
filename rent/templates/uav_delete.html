@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Delete UAV - {{ uav.brand }} {{ uav.model }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="my-4">Delete UAV</h1>
+            <p>Are you sure you want to delete this UAV: <strong>{{ uav.brand }} {{ uav.model }}</strong>?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="{% url 'uav_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Delete Rental Record{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="my-4">Delete Rental Record</h1>
+            <p>Are you sure you want to delete this rental record?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <a href="{% url 'rental_record_list' %}">Back to Rental Records</a>
+        </div>
+    </div>
+{% endblock %}

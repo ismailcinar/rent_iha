@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+
+<html>
+<head>
+    <title>Rented UAVs</title>
+</head>
+<body>
+    <h1>Rented UAVs</h1>
+    <ul>
+        {% for rental_record in rented_uavs %}
+            <li>{{ rental_record.uav.brand }} {{ rental_record.uav.model }} - Start Date: {{ rental_record.start_date }} - End Date: {{ rental_record.end_date }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

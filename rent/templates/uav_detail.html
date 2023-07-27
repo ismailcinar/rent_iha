@@ -1,0 +1,22 @@
+<!-- uav_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="my-4">{{ uav.brand }} {{ uav.model }}</h1>
+            <ul class="list-group mb-3">
+                <li class="list-group-item">Brand: {{ uav.brand }}</li>
+                <li class="list-group-item">Model: {{ uav.model }}</li>
+                <li class="list-group-item">Weight: {{ uav.weight }}</li>
+                <li class="list-group-item">Category: {{ uav.category }}</li>
+                <li class="list-group-item">Rental Price: {{ uav.rental_price }}</li>
+            </ul>
+            <img src="{{ uav.image.url }}" alt="{{ uav.brand }} {{ uav.model }}" class="img-fluid">
+            <br>
+            <a href="{% url 'uav_update' uav.pk %}" class="btn btn-primary mt-2 mr-2">Update</a>
+            <a href="{% url 'uav_delete' uav.pk %}" class="btn btn-danger mt-2">Delete</a>
+        </div>
+    </div>
+{% endblock %}
+

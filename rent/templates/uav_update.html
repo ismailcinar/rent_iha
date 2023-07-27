@@ -1,0 +1,39 @@
+<!-- uav_update.html -->
+{% extends 'base.html' %}
+{% block title %}Update UAV - {{ uav.brand }} {{ uav.model }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="my-4">Update UAV</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="brand">Brand:</label>
+                    <input type="text" name="brand" id="brand" class="form-control" value="{{ uav.brand }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="model">Model:</label>
+                    <input type="text" name="model" id="model" class="form-control" value="{{ uav.model }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight:</label>
+                    <input type="number" step="0.01" name="weight" id="weight" class="form-control" value="{{ uav.weight }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input type="text" name="category" id="category" class="form-control" value="{{ uav.category }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="rental_price">Rental Price:</label>
+                    <input type="number" step="0.01" name="rental_price" id="rental_price" class="form-control" value="{{ uav.rental_price }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image:</label>
+                    <input type="file" name="image" id="image" class="form-control-file">
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

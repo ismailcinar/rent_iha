@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Update Rental Record{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="my-4">Update Rental Record</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

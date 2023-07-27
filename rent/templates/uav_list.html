@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}UAV List{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <h1 class="my-4">UAV List</h1>
+            <form method="get" class="search-form">
+                {{ uav_filter.form.as_p }}
+                <div class="form-group">
+                    <label for="{{ uav_filter.form.search.id_for_label }}">Search:</label>
+                    {{ uav_filter.form.search }}
+                </div>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form>
+            
+            <br>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Weight</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Rental Price</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for uav in uav_filter.qs %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ uav.brand }}</td>
+                            <td>{{ uav.model }}</td>
+                            <td>{{ uav.weight }}</td>
+                            <td>{{ uav.category }}</td>
+                            <td>{{ uav.rental_price }}</td>
+                            <td>
+                                {% if request.user.is_authenticated %}
+                                
+                                    {% if request.user.is_superuser %}
+                                        
+                                        <a href="{% url 'uav_detail' uav.pk %}" class="btn btn-info btn-sm">Details</a>
+                                        <a href="{% url 'uav_update' uav.pk %}" class="btn btn-primary btn-sm">Update</a>
+                                        <a href="{% url 'uav_delete' uav.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                                    {% else %}
+                                        <a href="{% url 'rent_uav' uav.pk %}" class="btn btn-success btn-sm">Rent</a>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
